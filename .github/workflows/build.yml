@@ -1,36 +1,35 @@
-name: Build WsaPatch.dll
+nombre : Compilación WsaPatch.dll
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+en :
+  empujar :
+    ramas : [ "principal" ]
+  pull_request :
+    ramas : [ "principal" ]
 
-env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .
-  BUILD_CONFIGURATION: Release
+env :
+  # Ruta al archivo de solución relativa a la raíz del proyecto.
+  RUTA_ARCHIVO_SOLUCIÓN : .
+  BUILD_CONFIGURATION : Lanzamiento
 
-permissions:
-  contents: read
+permisos :
+  contenido : leer
 
-jobs:
-  build:
-    runs-on: windows-latest
+trabajos :
+  construir :
+    se ejecuta : windows-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    pasos :
+      - nombre : Caja
+        usos : acciones/checkout@v3
 
-      - name: Configure
-        run: |
-          cmake -G "Visual Studio 17 2022" -A x64 -B build
+      - nombre : Configurar
+        ejecutar : |
+          cmake -G "Visual Studio 17 2022" -A x64 -B compilación
+      - nombre : versión de compilación
+        ejecutar : cmake --build build --config Release --verbose
 
-      - name: Build Release
-        run: cmake --build build --config Release --verbose
-
-      - name: Upload WsaPatch.dll
-        uses: actions/upload-artifact@v3
-        with:
-          name: WsaPatch-build
-          path: .\build
+      - nombre : Cargar WsaPatch.dll
+        usos : acciones/subir-artefacto@v3
+        con :
+          nombre : WsaPatch-compilación
+          ruta : .\construir
